@@ -1,0 +1,13 @@
+<div id="dimScreen">
+  <div class="clip-text">
+    <h2  class="div">{{'home.welcome' | translate}} {{getUsername()}} !</h2>
+    <div class="col-md-12">
+      <div *ngIf=retrievedImage>
+        <p-image [src]="retrievedImage" styleClass="img1"  alt="Image" ></p-image>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
