@@ -1,10 +1,8 @@
 <div class="topnav">
   <a [routerLink]="['/home']" (click)="changeStatuses('home')"
      [ngClass]="statusHome.value ? 'active' : 'inactive'" >{{'navigation.home' | translate}}</a>
-  <a [routerLink]="['/items']" (click)="changeStatuses('items')"
-     [ngClass]="statusItem.value ? 'active' : 'inactive'" >{{'Items' | translate}}</a>
   <a [routerLink]="['/products']" (click)="changeStatuses('products')"
-     [ngClass]="statusProducts.value ? 'active' : 'inactive'" >{{'Products' | translate}}</a>
+     [ngClass]="statusProducts.value ? 'active' : 'inactive'" >{{'navigation.products' | translate}}</a>
 
 
   <div style="display: inline">

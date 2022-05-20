@@ -14,6 +14,7 @@ import {ToastModule} from "primeng/toast";
 import {FormsModule} from "@angular/forms";
 import {ConfirmationService} from "primeng/api";
 import {TooltipModule} from "primeng/tooltip";
+import {TranslateModule} from "@ngx-translate/core";
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {TooltipModule} from "primeng/tooltip";
         DialogModule,
         ToastModule,
         FormsModule,
-        TooltipModule
+        TooltipModule,
+        TranslateModule
     ],
   exports:[
     ProductsComponent

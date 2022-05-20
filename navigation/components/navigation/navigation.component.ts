@@ -30,8 +30,6 @@ export class NavigationComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
-
   changeStatuses(link: String) {
     for(var status of this.statuses) {
       status.value = link === status.label;

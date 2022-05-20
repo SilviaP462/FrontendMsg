@@ -1,4 +1,5 @@
 {
+  "new": "New",
   "cancel": "Cancel",
   "save": "Save",
   "statistics": "Statistics",
@@ -15,7 +16,7 @@
     "buttonRegister": "Register"
   },
   "navigation": {
-    "users": "Users",
+    "products": "Products",
     "home": "Home"
   },
   "home": {
@@ -24,34 +25,15 @@
   "translate": {
     "languages": "Languages"
   },
-  "export": {
-    "export": "Create Your Resume"
-  },
 
-  "users": {
-    "list": "List of users",
-    "username": "Username",
-    "first_name": "First name",
-    "last_name": "Last name",
-    "mobile_number": "Mobile number",
-    "email": "Email",
-    "active": "Active",
-    "not_found": "No users found.",
-    "roles": "Roles",
-    "status": "Status",
-    "notification": "Notification",
-    "add": "Add user",
-    "details": "User Details",
-    "header_notif": "Modified user",
-    "required_first_name": "First name is required.",
-    "required_last_name": "Last name is required.",
-    "required_email": "Email is required.",
-    "required_mobile_number": "Mobile number is required.",
-    "select": "Select user"
+  "items": {
+    "manage":"Manage Items",
+    "name": "Name",
+    "description": "Description",
+    "status":"Status"
   },
-
-  "notification":{
-    "link": "Edit",
-    "viewHistory": "View History"
+  "total": {
+    "first": "In total there are",
+    "second":"products."
   }
 }

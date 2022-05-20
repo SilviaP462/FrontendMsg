@@ -1,5 +1,5 @@
 import {Inject, Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpInterceptor, HttpParams} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {BackendService} from "src/backend/backend.service";
 
 @Injectable({

@@ -24,8 +24,6 @@ import {MessageModule} from "primeng/message";
 import {MessagesModule} from "primeng/messages";
 import {ErrorModule} from "../error/error.module";
 import {RegisterModule} from "../register/register.module";
-import { ItemComponent } from '../item/components/item/item.component';
-import { ItemsListComponent } from '../item/components/items-list/items-list.component';
 import {InputTextModule} from "primeng/inputtext";
 import {RippleModule} from "primeng/ripple";
 import {DialogModule} from "primeng/dialog";
@@ -33,8 +31,6 @@ import {InputTextareaModule} from "primeng/inputtextarea";
 import {DropdownModule} from "primeng/dropdown";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {ToolbarModule} from "primeng/toolbar";
-import {ItemsModule} from "../item/items.module";
-import {RouterModule} from "@angular/router";
 import {ProductsModule} from "../products/products.module";
 
 
@@ -56,7 +52,6 @@ import {ProductsModule} from "../products/products.module";
     BrowserAnimationsModule,
     LoginModule,
     RegisterModule,
-    ItemsModule,
     ProductsModule,
     NavigationModule,
     MessageModule,

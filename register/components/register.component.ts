@@ -58,11 +58,13 @@ export class RegisterComponent implements OnInit {
     }
     if(!this.pictureUploaded)
       this.messageService.add({severity:'error', summary:'Profile picture missing', detail:'Please upload a profile picture!'});
+    else {
+      this.messageService.add({severity:'error', summary:'Please complete all fields', detail:'ok'});
+    }
 
   }
 
   onSubmit() {
-
     this.register();
   }
 
@@ -73,7 +75,7 @@ export class RegisterComponent implements OnInit {
 
   public onFileChanged(event: { target: { files: File[]; }; }) {
     //Select File
-    this.messageService.add({severity:'success', summary:'Image chosen. Ready to upload', detail:'ok'});
+    this.messageService.add({severity:'success', summary:'Image chosen. Ready to upload', detail:'Click the Upload File button.'});
     this.selectedFile = event.target.files[0];
   }
 

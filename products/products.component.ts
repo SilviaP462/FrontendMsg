@@ -3,27 +3,26 @@ import {Item} from "./models/item";
 import {Subscription} from "rxjs";
 import {ItemService} from "./item.service";
 import {ConfirmationService, MessageService} from "primeng/api";
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
-  styleUrls: []
+  styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit {
   items:Item[]=[]
   item:Item={} as Item;
   itemsDialog: boolean = false;
+  viewItemsDialog: boolean = false;
   submitted: boolean = false;
   statuses: any[];
   editing: boolean = false;
   subscription: Subscription = new Subscription();
-  paramId: number=-1;
   cols: any[];
   exportColumns: any[];
   selectedItems:Item[];
 
-  constructor(private itemService:ItemService,private messageService: MessageService, private confirmationService: ConfirmationService,private router: Router) { }
+  constructor(private itemService:ItemService,private messageService: MessageService, private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
 
@@ -34,12 +33,6 @@ export class ProductsComponent implements OnInit {
       {label: 'NEW', value: 'NEW'},
       {label: 'USED', value: 'USED'}
     ]
-
-    this.cols = [
-      { field: 'name', header: 'Name', customExportHeader: 'Name' },
-      { field: 'description', header: 'Description' },
-      { field: 'status', header: 'Status' }
-    ];
 
     this.exportColumns = this.cols.map(col => ({title: col.header, dataKey: col.field}));
   }
@@ -70,22 +63,15 @@ export class ProductsComponent implements OnInit {
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
 
-
       accept: () => {
         this.itemService.deleteItem(product.idItem).subscribe(res=>{});
         this.items = this.items.filter(val => val.idItem !== product.idItem);
-        //this.itemService.deleteItem(this.item.id);
         // @ts-ignore
         product = {};
         this.messageService.add({severity:'success', summary: 'Successful', detail: 'Product Deleted', life: 3000});
 
-
       }
     });
-
-
-
-
   }
 
   saveItem(){
@@ -123,24 +109,26 @@ export class ProductsComponent implements OnInit {
 
   }
 
+  viewProduct(product: Item) {
+
+    this.item= {...product};
+    this.viewItemsDialog = true;
+
+  }
+
+  hideViewDialog(){
+    this.viewItemsDialog = false;
+  }
+
   exportPdf() {
     import("jspdf").then(jsPDF => {
       import("jspdf-autotable").then(x => {
         // @ts-ignore
         const doc = new jsPDF.default(0,0);
-        (doc as any).autoTable(this.exportColumns, this.items);
+        (doc as any).autoTable(this.exportColumns, this.selectedItems);
         doc.save('products.pdf');
       })
     })
   }
-
- /* exportExcel() {
-    import("xlsx").then(xlsx => {
-      const worksheet = xlsx.utils.json_to_sheet(this.items);
-      const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
-      const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
-      saveAsExcelFile(excelBuffer, "products");
-    });
-  }*/
 
 }

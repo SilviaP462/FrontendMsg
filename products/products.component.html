@@ -4,45 +4,60 @@
 <div class="card">
   <p-toolbar styleClass="mb-4">
     <ng-template pTemplate="left">
-      <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
-      <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
-      <button type="button" pButton pRipple icon="pi pi-filter" (click)="dt.exportCSV({selectionOnly:true})" class="p-button-info ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
+      <button pButton pRipple label="{{'new' | translate}}" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+      <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning mr-2" pTooltip="Export PDF" tooltipPosition="bottom"></button>
+      <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="dt.exportCSV({selectionOnly:true})" class="p-button-info ml-auto" pTooltip="Export Excel" tooltipPosition="bottom"></button>
     </ng-template>
 
   </p-toolbar>
 
-  <p-table #dt [value]="items" [columns]="cols" [rows]="10" [paginator]="true" responsiveLayout="scroll" selectionMode="multiple"  [(selection)]="selectedItems"
-           dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true" [exportHeader]="'customExportHeader'">
+  <p-table #dt [value]="items" [rows]="10" [paginator]="true"  selectionMode="multiple"  [(selection)]="selectedItems" responsiveLayout="scroll"
+           dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true" [exportHeader]="'customExportHeader'" [globalFilterFields]="['name','description','status']">
     <ng-template pTemplate="caption">
       <div class="flex align-items-center justify-content-between">
-        <h5 class="m-0">Manage Items</h5>
-        <span class="p-input-icon-left">
-                    <i class="pi pi-search"></i>
-          <!--<input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />-->
-                </span>
+        <h2 class="m-0">{{'items.manage' | translate}}</h2>
       </div>
     </ng-template>
     <ng-template pTemplate="header">
+
       <tr>
-        <!--[pSelectableRow]="item"-->
-        <th style="width: 3rem">
-          <!--<p-tableHeaderCheckbox></p-tableHeaderCheckbox>-->
-        </th>
-        <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
-        <th pSortableColumn="description">Description<p-sortIcon field="description"></p-sortIcon></th>
-        <th pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon></th>
+        <th style="width: 3rem"></th>
+        <th pSortableColumn="name">{{'items.name' | translate}}<p-sortIcon field="name"></p-sortIcon></th>
+        <th pSortableColumn="description">{{'items.description' | translate}}<p-sortIcon field="description"></p-sortIcon></th>
+        <th pSortableColumn="status">{{'items.status' | translate}} <p-sortIcon field="status"></p-sortIcon></th>
         <th></th>
       </tr>
+
+      <tr>
+        <th></th>
+        <th>
+          <p-columnFilter type="text" field="name"></p-columnFilter>
+        </th>
+        <th>
+          <p-columnFilter type="text" field="description"></p-columnFilter>
+        </th>
+        <th>
+          <p-columnFilter field="status" matchMode="equals" [showMenu]="false">
+            <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+              <p-dropdown [ngModel]="value" [options]="statuses" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
+                <ng-template let-option pTemplate="item">
+                  <span [class]="'customer-badge status-' + option.value">{{option.label}}</span>
+                </ng-template>
+              </p-dropdown>
+            </ng-template>
+          </p-columnFilter>
+        </th>
+      </tr>
+
     </ng-template>
-    <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
-      <tr  [pSelectableRow]="product"  [pSelectableRowIndex]="rowIndex">
-        <td>
-          <!--<p-tableCheckbox [value]="product"></p-tableCheckbox>-->
-        </td>
+    <ng-template pTemplate="body" let-product let-rowData>
+      <tr [pSelectableRow]="rowData">
+        <td></td>
         <td>{{product.name}}</td>
         <td>{{product.description}}</td>
-        <td><span [class]="'product-badge status-' + (product.status ? product.status.toLowerCase() : '')">{{product.status}}</span></td>
+        <td><span [class]="'product-badge'">{{product.status}}</span></td>
         <td>
+          <button pButton pRipple icon="pi pi-info" class="p-button-rounded p-button-info mr-2" (click)="viewProduct(product)"></button>
           <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editProduct(product)"></button>
           <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteItem(product)"></button>
         </td>
@@ -50,7 +65,7 @@
     </ng-template>
     <ng-template pTemplate="summary">
       <div class="flex align-items-center justify-content-between">
-        In total there are {{items ? items.length : 0 }} products.
+        {{'total.first' | translate}} {{items ? items.length : 0 }} {{'total.second' | translate}}
       </div>
     </ng-template>
   </p-table>
@@ -59,16 +74,18 @@
 <p-dialog [(visible)]="itemsDialog" [style]="{width: '450px', height:'500px'}" header="Product Details" [modal]="true" styleClass="p-fluid">
   <ng-template pTemplate="content">
     <div class="field">
-      <label for="name">Name</label>
+      <label for="name">{{'items.name' | translate}}</label>
       <input type="text" pInputText id="name" [(ngModel)]="item.name" required autofocus />
       <small class="p-error" *ngIf="submitted && !item.name">Name is required.</small>
     </div>
+    <br>
     <div class="field">
-      <label for="description">Description</label>
+      <label for="description">{{'items.description' | translate}}</label>
       <textarea id="description" pInputTextarea [(ngModel)]="item.description" required rows="3" cols="20"></textarea>
     </div>
+    <br>
     <div class="field">
-      <label for="status">Status</label>
+      <label for="status">{{'items.status' | translate}}</label>
       <p-dropdown id="status" [(ngModel)]="item.status" inputId="status" [options]="statuses" placeholder="Select">
         <ng-template let-option pTemplate="item">
           <span [class]="'product-badge status-' + option.value">{{option.label}}</span>
@@ -78,8 +95,33 @@
   </ng-template>
 
   <ng-template pTemplate="footer">
-    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-    <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveItem()"></button>
+    <button pButton pRipple label="{{'cancel' | translate}}" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+    <button pButton pRipple label="{{'save' | translate}}" icon="pi pi-check" class="p-button-text" (click)="saveItem()"></button>
+  </ng-template>
+</p-dialog>
+
+
+<p-dialog [(visible)]="viewItemsDialog" [style]="{width: '450px', height:'500px'}" header="Product Details" [modal]="true" styleClass="p-fluid">
+  <ng-template pTemplate="content">
+    <div class="field">
+      <label for="nameV">{{'items.name' | translate}}</label>
+      <input type="text" pInputText id="nameV" [(ngModel)]="item.name" [disabled]=true required autofocus/>
+    </div>
+    <br>
+    <div class="field">
+      <label for="descriptionV">{{'items.description' | translate}}</label>
+      <textarea id="descriptionV" pInputTextarea [(ngModel)]="item.description" [disabled]=true required rows="3" cols="20"></textarea>
+    </div>
+    <br>
+    <div class="field">
+      <label for="statusV">{{'items.status' | translate}}</label>
+      <input type="text" pInputText id="statusV" [(ngModel)]="item.status" [disabled]=true required autofocus/>
+    </div>
+    <br>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="{{'cancel' | translate}}" icon="pi pi-times" class="p-button-text" (click)="hideViewDialog()"></button>
   </ng-template>
 </p-dialog>
 
