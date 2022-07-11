@@ -16,6 +16,7 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getImage();
+    //console.log(sessionStorage.getItem('username'));
   }
 
   getUsername(){
@@ -24,7 +25,7 @@ export class HomePageComponent implements OnInit {
 
 
   getImage() {
-    //Make a call to Sprinf Boot to get the Image Bytes.
+    //Make a call to Spring Boot to get the Image Bytes.
     this.httpClient.get('http://localhost:4201/get/' + sessionStorage.getItem('username'))
       .subscribe(
         res => {

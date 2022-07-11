@@ -56,7 +56,7 @@ export class ProductsComponent implements OnInit {
   }
 
   deleteItem(product: Item) {
-    console.log(product.idItem);
+    //console.log(product.idItem);
 
     this.confirmationService.confirm({
       message: 'Are you sure you want to delete ' + product.name + '?',
@@ -77,7 +77,7 @@ export class ProductsComponent implements OnInit {
   saveItem(){
     this.submitted = true;
 
-    console.log(this.item);
+    //console.log(this.item);
 
 
     if (this.item.name.trim() && this.item.description.trim()) {

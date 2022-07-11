@@ -51,11 +51,13 @@ export class LoginComponent implements OnInit {
   login() {
     this.formSubmitted=true;
     this.loginService.login(this.userForm.controls['username'].value, this.userForm.controls['password'].value).subscribe((user)=>{
+      console.log(user.jwt);
       this.user=user;
+      //console.log(user.token);
       this.user.password= this.userForm.controls['password'].value;
-      sessionStorage.setItem('username', user.username);
-      sessionStorage.setItem('password', user.password);
-      sessionStorage.setItem('token', user.token);
+      sessionStorage.setItem('username',this.userForm.controls['username'].value);
+      //sessionStorage.setItem('password', this.user.password);
+      sessionStorage.setItem('token', user.jwt);
 
       this.router.navigate(['home']);
     });

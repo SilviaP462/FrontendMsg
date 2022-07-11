@@ -17,8 +17,8 @@ export class ErrorPrinterComponent implements OnInit {
               private translateService : TranslateService) {
 
     errorPrintingService.error$.subscribe(error => {
-      console.log(error.errorCode.code)
-      console.log(error.errorCode.description)
+      //console.log(error.errorCode.code)
+      //console.log(error.errorCode.description)
       this.showError(error)});
   }
 

@@ -1,5 +1,5 @@
-import {Inject, Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpInterceptor, HttpParams} from "@angular/common/http";
+import {Injectable} from '@angular/core';
+import {HttpParams} from "@angular/common/http";
 import {BackendService} from "../../backend/backend.service";
 
 @Injectable({
@@ -7,7 +7,7 @@ import {BackendService} from "../../backend/backend.service";
 })
 export class LoginService {
 
-  constructor(private backendService: BackendService, private http: HttpClient) { }
+  constructor(private backendService: BackendService) { }
 
   login(username: string, password: string){
     let params=new HttpParams().set('user', username).set('password', password);

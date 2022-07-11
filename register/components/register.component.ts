@@ -90,7 +90,7 @@ export class RegisterComponent implements OnInit {
     //Make a call to the Spring Boot Application to save the image
     this.httpClient.post('http://localhost:4201/upload', uploadImageData, { observe: 'response' }).subscribe((response) => {
 
-        console.log("ok:"+String(response.status));
+        //console.log("ok:"+String(response.status));
           if (response.status === 200 || response.status ===406) {
             this.message = 'Image uploaded successfully';
             this.messageService.add({severity:'success', summary:'Image uploaded successfully', detail:'ok1'});
