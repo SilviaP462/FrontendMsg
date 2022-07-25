@@ -17,7 +17,8 @@
   },
   "navigation": {
     "products": "Products",
-    "home": "Home"
+    "home": "Home",
+    "lang": "Change Language"
   },
   "home": {
     "welcome": "Welcome,"

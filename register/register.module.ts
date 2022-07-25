@@ -11,27 +11,29 @@ import {ToastModule} from "primeng/toast";
 import {NgxCaptchaModule} from "ngx-captcha";
 import {RegisterComponent} from "./components/register.component";
 import {FileUploadModule} from "primeng/fileupload";
+import {RippleModule} from "primeng/ripple";
 
 
 @NgModule({
   declarations: [
     RegisterComponent
   ],
-    imports: [
-        CommonModule,
-        BackendModule,
-        HttpClientModule,
-        PasswordModule,
-        ButtonModule,
-        InputTextModule,
-        TranslateModule,
-        ToastModule,
-        NgxCaptchaModule,
-        FileUploadModule,
-      FormsModule,
-      ReactiveFormsModule
+  imports: [
+    CommonModule,
+    BackendModule,
+    HttpClientModule,
+    PasswordModule,
+    ButtonModule,
+    InputTextModule,
+    TranslateModule,
+    ToastModule,
+    NgxCaptchaModule,
+    FileUploadModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RippleModule
 
-    ],
+  ],
   exports:[
     RegisterComponent,
   ]

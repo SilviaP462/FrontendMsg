@@ -1,9 +1,7 @@
-
-export interface User{
-   firstName: string;
-   lastName: string;
-   password: string;
-   username:string;
-   token: string;
-
+export interface User {
+  firstName: string;
+  lastName: string;
+  password: string;
+  username: string;
+  token: string;
 }

@@ -40,11 +40,11 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     const response = grecaptcha.getResponse();
-    if (response.length === 0) {
+   /* if (response.length === 0) {
       this.errormsg = 'Recaptcha not verified. Please try again!';
       this.messageService.add({severity: 'error', summary: 'Error', detail: this.errormsg, life: 3000});
       return;
-    }
+    }*/
     this.login();
   }
 
@@ -53,10 +53,8 @@ export class LoginComponent implements OnInit {
     this.loginService.login(this.userForm.controls['username'].value, this.userForm.controls['password'].value).subscribe((user)=>{
       console.log(user.jwt);
       this.user=user;
-      //console.log(user.token);
       this.user.password= this.userForm.controls['password'].value;
       sessionStorage.setItem('username',this.userForm.controls['username'].value);
-      //sessionStorage.setItem('password', this.user.password);
       sessionStorage.setItem('token', user.jwt);
 
       this.router.navigate(['home']);

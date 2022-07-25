@@ -4,15 +4,13 @@
 <div class="card">
   <p-toolbar styleClass="mb-4">
     <ng-template pTemplate="left">
-      <button pButton pRipple label="{{'new' | translate}}" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
-      <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning mr-2" pTooltip="Export PDF" tooltipPosition="bottom"></button>
-      <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="dt.exportCSV({selectionOnly:true})" class="p-button-info ml-auto" pTooltip="Export Excel" tooltipPosition="bottom"></button>
+      <button pButton pRipple label="{{'new' | translate}}" icon="pi pi-plus" class="p-button-success mr-2 spacingButtons" (click)="openNew()"></button>
+      <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning mr-2 spacingButtons" pTooltip="Export PDF" tooltipPosition="bottom"></button>
+      <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-info ml-auto spacingButtons" pTooltip="Export Excel" tooltipPosition="bottom"></button>
     </ng-template>
-
   </p-toolbar>
 
-  <p-table #dt [value]="items" [rows]="10" [paginator]="true"  selectionMode="multiple"  [(selection)]="selectedItems" responsiveLayout="scroll"
-           dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true" [exportHeader]="'customExportHeader'" [globalFilterFields]="['name','description','status']">
+  <p-table [value]="items" [(selection)]="selectedItems" dataKey="idItem" responsiveLayout="scroll" selectionMode="multiple" (onRowSelect)="onRowSelect($event)">
     <ng-template pTemplate="caption">
       <div class="flex align-items-center justify-content-between">
         <h2 class="m-0">{{'items.manage' | translate}}</h2>
@@ -21,7 +19,7 @@
     <ng-template pTemplate="header">
 
       <tr>
-        <th style="width: 3rem"></th>
+        <th style="width: 5rem"></th>
         <th pSortableColumn="name">{{'items.name' | translate}}<p-sortIcon field="name"></p-sortIcon></th>
         <th pSortableColumn="description">{{'items.description' | translate}}<p-sortIcon field="description"></p-sortIcon></th>
         <th pSortableColumn="status">{{'items.status' | translate}} <p-sortIcon field="status"></p-sortIcon></th>
@@ -29,7 +27,7 @@
       </tr>
 
       <tr>
-        <th></th>
+        <th><p-tableHeaderCheckbox></p-tableHeaderCheckbox></th>
         <th>
           <p-columnFilter type="text" field="name"></p-columnFilter>
         </th>
@@ -50,16 +48,16 @@
       </tr>
 
     </ng-template>
-    <ng-template pTemplate="body" let-product let-rowData>
-      <tr [pSelectableRow]="rowData">
-        <td></td>
-        <td>{{product.name}}</td>
+    <ng-template pTemplate="body" let-product>
+      <tr>
+        <td><p-tableCheckbox [value]="product"></p-tableCheckbox></td>
+        <td class="my-center-text">{{product.name}}</td>
         <td>{{product.description}}</td>
         <td><span [class]="'product-badge'">{{product.status}}</span></td>
         <td>
           <button pButton pRipple icon="pi pi-info" class="p-button-rounded p-button-info mr-2" (click)="viewProduct(product)"></button>
-          <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editProduct(product)"></button>
-          <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteItem(product)"></button>
+          <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2 spacingButtons" (click)="editProduct(product)"></button>
+          <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning spacingButtons" (click)="deleteItem(product)"></button>
         </td>
       </tr>
     </ng-template>

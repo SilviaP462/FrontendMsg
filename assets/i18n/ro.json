@@ -18,7 +18,8 @@
   },
   "navigation": {
     "home": "Acasă",
-    "products": "Produse"
+    "products": "Produse",
+    "lang": "Traducere"
   },
   "items": {
     "manage":"Manipulare produse",

@@ -7,10 +7,8 @@ import {TranslateModule} from "@ngx-translate/core";
 import {RouterModule} from "@angular/router";
 import {LoginGuard} from "./components/guards/LoginGuard";
 import {HomeGuard} from "./components/guards/HomeGuard";
-import {RegisterGuard} from "./components/guards/RegisterGuard";
 import {ChipModule} from "primeng/chip";
-import {ItemsGuard} from "./components/guards/ItemsGuard";
-import {ProductsGuard} from "./components/guards/ProductsGuard";
+import {TooltipModule} from "primeng/tooltip";
 
 
 @NgModule({
@@ -20,20 +18,18 @@ import {ProductsGuard} from "./components/guards/ProductsGuard";
   exports: [
     NavigationComponent
   ],
-    imports: [
-        CommonModule,
-        LogoutModule,
-        TranslateModule,
-        AppTranslateModule,
-        ChipModule,
-        RouterModule
-    ],
+  imports: [
+    CommonModule,
+    LogoutModule,
+    TranslateModule,
+    AppTranslateModule,
+    ChipModule,
+    RouterModule,
+    TooltipModule
+  ],
   providers:[
     LoginGuard,
     HomeGuard,
-    RegisterGuard,
-    ItemsGuard,
-    ProductsGuard
   ]
 })
 export class NavigationModule { }

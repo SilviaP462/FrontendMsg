@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
-import {Item} from "./models/item";
+import {Item} from "../models/item";
 import {Subscription} from "rxjs";
-import {ItemService} from "./item.service";
+import {ItemService} from "../item.service";
 import {ConfirmationService, MessageService} from "primeng/api";
 
 @Component({
@@ -20,9 +20,10 @@ export class ProductsComponent implements OnInit {
   subscription: Subscription = new Subscription();
   cols: any[];
   exportColumns: any[];
-  selectedItems:Item[];
+  selectedItems:Item[]=[];
 
-  constructor(private itemService:ItemService,private messageService: MessageService, private confirmationService: ConfirmationService) { }
+  constructor(private itemService:ItemService,private messageService: MessageService, private confirmationService: ConfirmationService) {
+  }
 
   ngOnInit(): void {
 
@@ -35,6 +36,8 @@ export class ProductsComponent implements OnInit {
     ]
 
     this.exportColumns = this.cols.map(col => ({title: col.header, dataKey: col.field}));
+    console.log(this.selectedItems)
+    console.log("ok")
   }
 
   getItems() {
@@ -72,6 +75,11 @@ export class ProductsComponent implements OnInit {
 
       }
     });
+  }
+  onRowSelect(event: { data: { name: any; }; }) {
+    this.messageService.add({severity:'info', summary:'Product Selected', detail: event.data.name});
+    console.log(this.selectedItems)
+    console.log("ok")
   }
 
   saveItem(){
@@ -129,6 +137,33 @@ export class ProductsComponent implements OnInit {
         doc.save('products.pdf');
       })
     })
+  }
+
+  exportExcel() {
+    import("xlsx").then(xlsx => {
+      const worksheet = xlsx.utils.json_to_sheet(this.selectedItems);
+      const workbook = { Sheets: { data: worksheet }, SheetNames: ["data"] };
+      const excelBuffer: any = xlsx.write(workbook, {
+        bookType: "xlsx",
+        type: "array"
+      });
+      this.saveAsExcelFile(excelBuffer, "products");
+    });
+  }
+
+  saveAsExcelFile(buffer: any, fileName: string): void {
+    import("file-saver").then(FileSaver => {
+      let EXCEL_TYPE =
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
+      let EXCEL_EXTENSION = ".xlsx";
+      const data: Blob = new Blob([buffer], {
+        type: EXCEL_TYPE
+      });
+      FileSaver.saveAs(
+        data,
+        fileName + "_export_" + new Date().getTime() + EXCEL_EXTENSION
+      );
+    });
   }
 
 }

@@ -1,6 +1,6 @@
 import {NgModule} from "@angular/core";
 import {ProductsComponent} from "./products.component";
-import {ProductsRoutingModule} from "./products-routing.module";
+import {ProductsRoutingModule} from "../products-routing.module";
 import {ToolbarModule} from "primeng/toolbar";
 import {RippleModule} from "primeng/ripple";
 import {TableModule} from "primeng/table";
@@ -15,6 +15,9 @@ import {FormsModule} from "@angular/forms";
 import {ConfirmationService} from "primeng/api";
 import {TooltipModule} from "primeng/tooltip";
 import {TranslateModule} from "@ngx-translate/core";
+import {BrowserModule} from "@angular/platform-browser";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [

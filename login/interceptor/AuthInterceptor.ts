@@ -5,15 +5,16 @@ import {Observable} from "rxjs";
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if(req.url!=="http://localhost:4201/login" && req.url!=="http://localhost:4201/register") {
+    if (req.url !== "http://localhost:4201/login" && req.url !== "http://localhost:4201/register" && req.url !== "http://localhost:4201/upload") {
       console.log(req.url);
-      console.log(sessionStorage.getItem('token'));
+      //console.log(sessionStorage.getItem('token'));
       req = req.clone({
         setHeaders: {
           'Content-Type': 'application/json; charset=utf-8',
           'Accept': 'application/json',
           'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
           'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'POST,GET,DELETE,PUT',
           'Access-Control-Allow-Credentials': 'true',
           'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token, content-type'
         },

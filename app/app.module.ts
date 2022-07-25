@@ -31,7 +31,7 @@ import {InputTextareaModule} from "primeng/inputtextarea";
 import {DropdownModule} from "primeng/dropdown";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {ToolbarModule} from "primeng/toolbar";
-import {ProductsModule} from "../products/products.module";
+import {ProductsModule} from "../products/component/products.module";
 
 
 

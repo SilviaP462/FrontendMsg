@@ -20,7 +20,8 @@ export class RegisterComponent implements OnInit {
   retrieveResonse: any;
   message: string='';
   imageName: string='';
-  pictureUploaded:boolean=false
+  pictureUploaded:boolean=false;
+  pictureChosen:boolean=false;
 
 
   @Output()
@@ -47,26 +48,18 @@ export class RegisterComponent implements OnInit {
     this.registerService.register(this.userForm.controls['firstName'].value,this.userForm.controls['lastName'].value,this.userForm.controls['username'].value, this.userForm.controls['password'].value).subscribe((user)=>{
       this.user=user;
 
-      sessionStorage.setItem('firstName', user.firstName);
-      sessionStorage.setItem('lastName', user.lastName);
-      sessionStorage.setItem('username', user.username);
-      sessionStorage.setItem('password', user.password);
-      sessionStorage.setItem('token', user.token);
-
-      this.router.navigate(['home']);
     });
+      this.messageService.add({severity:'success', summary: 'Successful Registration', detail: 'Please log in now!'});
+      this.router.navigate(['login']);
     }
-    if(!this.pictureUploaded)
+    else if(!this.pictureUploaded)
       this.messageService.add({severity:'error', summary:'Profile picture missing', detail:'Please upload a profile picture!'});
     else {
-      this.messageService.add({severity:'error', summary:'Please complete all fields', detail:'ok'});
+      this.messageService.add({severity:'error', summary:'Please complete all fields', detail:'All fields for registration'});
     }
 
   }
 
-  onSubmit() {
-    this.register();
-  }
 
   handleClick() {
     this.router.navigate(['login']);
@@ -75,6 +68,7 @@ export class RegisterComponent implements OnInit {
 
   public onFileChanged(event: { target: { files: File[]; }; }) {
     //Select File
+    this.pictureChosen=true;
     this.messageService.add({severity:'success', summary:'Image chosen. Ready to upload', detail:'Click the Upload File button.'});
     this.selectedFile = event.target.files[0];
   }
@@ -90,7 +84,6 @@ export class RegisterComponent implements OnInit {
     //Make a call to the Spring Boot Application to save the image
     this.httpClient.post('http://localhost:4201/upload', uploadImageData, { observe: 'response' }).subscribe((response) => {
 
-        //console.log("ok:"+String(response.status));
           if (response.status === 200 || response.status ===406) {
             this.message = 'Image uploaded successfully';
             this.messageService.add({severity:'success', summary:'Image uploaded successfully', detail:'ok1'});
