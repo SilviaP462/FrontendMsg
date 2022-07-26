@@ -15,11 +15,11 @@ export class ProductsComponent implements OnInit {
   itemsDialog: boolean = false;
   viewItemsDialog: boolean = false;
   submitted: boolean = false;
-  statuses: any[];
+  statuses: any[]=[];
   editing: boolean = false;
   subscription: Subscription = new Subscription();
-  cols: any[];
-  exportColumns: any[];
+  cols: any[]=[];
+  exportColumns: any[]=[];
   selectedItems:Item[]=[];
 
   constructor(private itemService:ItemService,private messageService: MessageService, private confirmationService: ConfirmationService) {
@@ -36,8 +36,6 @@ export class ProductsComponent implements OnInit {
     ]
 
     this.exportColumns = this.cols.map(col => ({title: col.header, dataKey: col.field}));
-    console.log(this.selectedItems)
-    console.log("ok")
   }
 
   getItems() {
@@ -59,8 +57,6 @@ export class ProductsComponent implements OnInit {
   }
 
   deleteItem(product: Item) {
-    //console.log(product.idItem);
-
     this.confirmationService.confirm({
       message: 'Are you sure you want to delete ' + product.name + '?',
       header: 'Confirm',
@@ -78,15 +74,10 @@ export class ProductsComponent implements OnInit {
   }
   onRowSelect(event: { data: { name: any; }; }) {
     this.messageService.add({severity:'info', summary:'Product Selected', detail: event.data.name});
-    console.log(this.selectedItems)
-    console.log("ok")
   }
 
   saveItem(){
     this.submitted = true;
-
-    //console.log(this.item);
-
 
     if (this.item.name.trim() && this.item.description.trim()) {
       if (this.editing) {

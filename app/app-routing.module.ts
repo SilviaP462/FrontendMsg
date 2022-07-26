@@ -4,7 +4,7 @@ import {LoginComponent} from "../login/components/login/login.component";
 import {HomeGuard} from "../navigation/components/guards/HomeGuard";
 import {LoginGuard} from "../navigation/components/guards/LoginGuard";
 import {RegisterComponent} from "../register/components/register.component";
-
+import {Error404Component} from "../error404/error404-component";
 
 
 const routes: Routes = [
@@ -37,9 +37,8 @@ const routes: Routes = [
     component: LoginComponent,
     canActivate: [LoginGuard]
 
-  }/*,
-
-  {path:'**', component: Error404Component}*/
+  },
+  {path:'**', component: Error404Component}
 ];
 
 @NgModule({

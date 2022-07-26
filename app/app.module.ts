@@ -32,12 +32,15 @@ import {DropdownModule} from "primeng/dropdown";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {ToolbarModule} from "primeng/toolbar";
 import {ProductsModule} from "../products/component/products.module";
+import { Error404Component } from '../error404/error404-component';
+import {ImageModule} from "primeng/image";
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    Error404Component,
 
   ],
   imports: [
@@ -63,7 +66,7 @@ import {ProductsModule} from "../products/component/products.module";
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    }), ErrorModule, InputTextModule, RippleModule, DialogModule, InputTextareaModule, DropdownModule, ConfirmDialogModule, ToolbarModule
+    }), ErrorModule, InputTextModule, RippleModule, DialogModule, InputTextareaModule, DropdownModule, ConfirmDialogModule, ToolbarModule, ImageModule
   ],
   providers: [MessageService,{
     provide: HTTP_INTERCEPTORS,

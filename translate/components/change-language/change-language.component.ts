@@ -13,6 +13,7 @@ export class ChangeLanguageComponent implements OnInit {
   languageList=[
     {code: 'en', label: 'English'},
     {code: 'ro', label: 'Română'},
+    {code: 'de', label: 'Deutsch'},
   ]
 
   constructor(private translateService: TranslateService) { }

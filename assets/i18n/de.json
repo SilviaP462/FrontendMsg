@@ -1,0 +1,35 @@
+{
+  "new": "Neu",
+  "cancel": "Abbrechen",
+  "save": "Speichern",
+  "login": {
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "username": "Username",
+    "password": "Passwort",
+    "buttonLogin": "Anmeldung",
+    "buttonRegister": "Registrieren"
+  },
+  "navigation": {
+    "products": "Artikel",
+    "home": "Startseite",
+    "lang": "Sprache ändern"
+  },
+  "home": {
+    "welcome": "Willkommen,"
+  },
+  "translate": {
+    "languages": "Sprachen"
+  },
+
+  "items": {
+    "manage":"Artikel verwalten",
+    "name": "Name",
+    "description": "Beschreibung",
+    "status":"Status"
+  },
+  "total": {
+    "first": "Insgesamt gibt es",
+    "second":"Artikel."
+  }
+}

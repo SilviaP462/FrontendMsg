@@ -16,7 +16,7 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getImage();
-    //console.log(sessionStorage.getItem('username'));
+
   }
 
   getUsername(){

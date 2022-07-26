@@ -27,7 +27,7 @@ export class ItemService {
   }
 
   deleteItem(id: number) {
-    return this.httpClient.delete<Item>("http://localhost:4201/items/ok/" + id);
+    return this.backendService.delete("http://localhost:4201/items/ok/",{idItem:id});
   }
 
 }
